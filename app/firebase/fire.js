@@ -125,6 +125,7 @@ export class Fire {
   }
 
   sendMessage(message, friend, latitude, longitude, endereco) {
+    let messageDate = new Date();
     this.ref.child("messages").child(friend.id).push().set(
       {
         sender_id: this.user.id,
@@ -133,7 +134,8 @@ export class Fire {
         latitude: latitude,
         longitude: longitude,
         endereco: endereco,
-        read: false
+        read: false,
+        message_date: messageDate.format('dd/mm/yyyy')
       }
     )
   }
