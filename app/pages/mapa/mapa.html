@@ -1,0 +1,27 @@
+<ion-navbar *navbar>
+  <ion-title>mapa</ion-title>
+</ion-navbar>
+
+<ion-content>
+  <div class="box">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>
+          Mensagem
+        </ion-label>
+
+        <ion-textarea [(ngModel)]="message">
+
+        </ion-textarea>
+      </ion-item>
+      <ion-item>
+        <button block (click)="sendMessage()">Enviar</button>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div id="map">
+
+  </div>
+
+</ion-content>
