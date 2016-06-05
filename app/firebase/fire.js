@@ -83,11 +83,16 @@ export class Fire {
   }
 
   getFriends(successCallback) {
-    this.http.get("https://graph.facebook.com/v2.5/me/friends?access_token=" + this.user.token)
-      .subscribe((response) => {
-        let list = response.json().data;
-        successCallback(list);
-      });
+    // this.http.get("https://graph.facebook.com/v2.5/me/friends?access_token=" + this.user.token)
+    //   .subscribe((response) => {
+    //     let list = response.json().data;
+    //     successCallback(list);
+    //   });
+
+    Facebook.api("/me/friends?access_token=" + this.user.token, []).then(response => {
+      let list = response.data;
+      successCallback(list);
+    })
   }
 
   getMessage(read, successCallback) {
