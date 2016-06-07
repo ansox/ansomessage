@@ -1,6 +1,7 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/message-body/message-body.html',
 })
 export class MessageBodyPage {

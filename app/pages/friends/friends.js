@@ -1,8 +1,9 @@
-import {Page, NavController, Loading} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, Loading} from 'ionic-angular';
 import {Fire} from '../../firebase/fire';
 import {MapaPage} from '../mapa/mapa';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/friends/friends.html',
 })
 export class FriendsPage {

@@ -1,8 +1,9 @@
-import {Page, NavController, Platform, NavParams, Loading} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, Platform, NavParams, Loading} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {Fire} from '../../firebase/fire';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/mapa/mapa.html',
 })
 export class MapaPage {

@@ -1,8 +1,9 @@
-import {Page, NavController} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController} from 'ionic-angular';
 import {MessagesNewPage} from '../messages-new/messages-new';
 import {MessagesReadPage} from '../messages-read/messages-read';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/messages/messages.html',
 })
 export class MessagesPage {

@@ -1,10 +1,11 @@
-import {Page, NavController} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController} from 'ionic-angular';
 import {Fire} from '../../firebase/fire';
 import {Geolocation} from 'ionic-native';
 import {RotasPage} from '../rotas/rotas';
 import {MessageBodyPage} from '../message-body/message-body'
 
-@Page({
+@Component({
   templateUrl: 'build/pages/messages-new/messages-new.html',
 })
 export class MessagesNewPage {

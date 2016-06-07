@@ -1,14 +1,13 @@
-import {App, Platform} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {ionicBootstrap, Platform} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from './pages/home/home';
 import {LoginPage} from './pages/login/login';
 import {Fire} from './firebase/fire';
 
 
-@App({
+@Component({
   templateUrl: 'build/app.html',
-  providers: [Fire],
-  config: { mode: "md"} // http://ionicframework.com/docs/v2/api/config/Config/
 })
 export class MyApp {
   static get parameters() {
@@ -25,3 +24,5 @@ export class MyApp {
     });
   }
 }
+
+ionicBootstrap(MyApp, [Fire]);

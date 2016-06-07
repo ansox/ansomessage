@@ -1,8 +1,9 @@
-import {Page, NavController, Loading} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, Loading} from 'ionic-angular';
 import {HomePage} from '../home/home';
 import {Fire} from '../../firebase/fire'
 
-@Page({
+@Component({
   templateUrl: 'build/pages/login/login.html',
 })
 export class LoginPage {

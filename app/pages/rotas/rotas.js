@@ -1,7 +1,8 @@
-import {Page, NavController, Platform, NavParams, Loading} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, Platform, NavParams, Loading} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 
-@Page({ 
+@Component({ 
   templateUrl: 'build/pages/rotas/rotas.html',
 })
 export class RotasPage {

@@ -1,8 +1,9 @@
-import {Page, Platform} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {Platform} from 'ionic-angular';
 import {MessagesPage} from '../messages/messages';
 import {FriendsPage} from '../friends/friends'
 
-@Page({
+@Component({
   templateUrl: 'build/pages/home/home.html'
 })
 export class HomePage {
