@@ -28,6 +28,7 @@ export class MapaPage {
 
   }
 
+
   loadMap() {
     let loading = Loading.create({
       spinner: "circles",

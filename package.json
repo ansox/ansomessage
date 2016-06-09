@@ -36,7 +36,13 @@
     "cordova-plugin-geolocation",
     "cordova-plugin-inappbrowser",
     "onesignal-cordova-plugin",
-    "cordova-plugin-crosswalk-webview"
+    {
+      "variables": {
+        "API_KEY_FOR_ANDROID": "AIzaSyCf0OJAXelTOGhkmYc5zuCo6UEbB05LiGw"
+      },
+      "locator": "cordova-plugin-googlemaps",
+      "id": "cordova-plugin-facebook4"
+    }
   ],
   "cordovaPlatforms": [
     {

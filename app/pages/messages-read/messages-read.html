@@ -7,8 +7,11 @@
 
 <ion-content class="messages-read">
   <ion-card *ngFor="let item of messageList">
-    <div style="position: relative">
-      <img style="min-width: 100%" [src]="item.map"/>
+    <div class="address">
+      {{item.endereco}}
+    </div>
+    <div>
+      <img style="min-width: 100%; top: 0;" [src]="item.map"/>
     </div>
 
     <ion-item >
@@ -22,16 +25,7 @@
     </ion-item>
 
     <ion-card-content>
-      <p>
-        <strong>
-          {{item.endereco}}
-        </strong>
-      </p>
-
-    </ion-card-content>
-
-    <ion-item>
       <button primary clear block (click)="openMessage(item)">Ler <ion-icon name="unlock"></ion-icon></button>
-    </ion-item>
+    </ion-card-content>
   </ion-card>
 </ion-content>

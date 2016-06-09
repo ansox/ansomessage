@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Platform} from 'ionic-angular';
 import {MessagesPage} from '../messages/messages';
-import {FriendsPage} from '../friends/friends'
+import {FriendsPage} from '../friends/friends';
 
 @Component({
   templateUrl: 'build/pages/home/home.html'

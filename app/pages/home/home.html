@@ -1,7 +1,9 @@
 
-<ion-menu  [content]="content">
+<ion-menu [content]="content">
+
   <ion-content>
-    <ion-list>
+    <img class="menu-img" src="img/map.jpg" alt="" />
+    <ion-list inset>
       <button ion-item (click)="openMenu(messages)"  menuClose>Mensagens</button>
       <button ion-item (click)="openMenu(friends)"  menuClose>Amigos</button>
     </ion-list>
