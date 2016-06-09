@@ -2,15 +2,16 @@ import {Component} from '@angular/core';
 import {Platform} from 'ionic-angular';
 import {MessagesPage} from '../messages/messages';
 import {FriendsPage} from '../friends/friends';
+import {Fire} from '../../firebase/fire';
 
 @Component({
   templateUrl: 'build/pages/home/home.html'
 })
 export class HomePage {
   static get parameters() {
-    return [[Platform]];
+    return [[Platform], [Fire]];
   }
-  constructor(platform) {
+  constructor(platform, fire) {
     this.messages = MessagesPage;
     this.friends = FriendsPage;
     this.rootPage = MessagesPage;
@@ -28,6 +29,11 @@ export class HomePage {
       window.plugins.OneSignal.enableInAppAlertNotification(false);
 
       window.plugins.OneSignal.enableNotificationsWhenActive(true);
+
+      fire.setPushId(() => {
+        console.log('add push id');
+      });
+
     });
   }
 

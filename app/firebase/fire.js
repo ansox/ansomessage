@@ -129,6 +129,15 @@ export class Fire {
     });
   }
 
+  getUser(id, successCallback) {
+    let ref = firebase.database().ref('users/' + id);
+
+    ref.once("value", (snapshot, prev) => {
+      let user = snapshot.val();
+      successCallback(user);
+    })
+  }
+
   sendMessage(message, friend, latitude, longitude, endereco) {
     let messageDate = new Date();
     this.ref.child("messages").child(friend.id).push().set(
@@ -142,7 +151,20 @@ export class Fire {
         read: false,
         message_date: messageDate.format('dd/mm/yyyy')
       }
-    )
+    ).then(() => {
+      this.getUser(friend.id, (user) => {
+        let notification = {
+          contents: {
+            en: "Seu amigo " + user.name + " deixou uma nova mensagem pra você."
+          },
+          include_player_ids: [user.pushId]
+        };
+
+        window.plugins.OneSignal.postNotification(notification, (response) => {
+          alert(response);
+        });
+      })
+    })
   }
 
   setMessageRead(message, successCallback) {
@@ -152,5 +174,17 @@ export class Fire {
     if (firebase.database().ref().update(updates)) {
       successCallback();
     }
+  }
+
+  setPushId(successCallback) {
+    window.plugins.OneSignal.getIds(ids => {
+      let updates = {};
+      updates['/users/' + this.user.id + '/pushId'] = ids.userId;
+
+      if(firebase.database().ref().update(updates)) {
+        successCallback();
+      }
+    });
+
   }
 }

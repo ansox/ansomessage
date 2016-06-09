@@ -42,7 +42,8 @@
       },
       "locator": "cordova-plugin-googlemaps",
       "id": "cordova-plugin-facebook4"
-    }
+    },
+    "cordova-plugin-crosswalk-webview"
   ],
   "cordovaPlatforms": [
     {
