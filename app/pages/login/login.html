@@ -1,4 +1,7 @@
 <ion-content padding class="login">
-  <button class="btn-face"  large (click)="login()" *ngIf = "showButton"><ion-icon name="logo-facebook"></ion-icon>Login</button>
-  <h1 *ngIf="!showButton">Aguarde</h1>
+  <div class="box-login">
+    <img src="img/logo.png" alt="" />
+    <button class="btn-face" (click)="login()" *ngIf = "showButton"><ion-icon name="logo-facebook"></ion-icon>Login</button>
+    <h1 *ngIf="!showButton">Aguarde...</h1>
+  </div>
 </ion-content>
