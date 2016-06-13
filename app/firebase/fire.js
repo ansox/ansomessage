@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
-import {Facebook} from 'ionic-native'
-import {Storage, LocalStorage} from 'ionic-angular'
+import {Facebook, SocialSharing} from 'ionic-native';
+import {Storage, LocalStorage} from 'ionic-angular';
 
 @Injectable()
 export class Fire {
@@ -186,5 +186,16 @@ export class Fire {
       }
     });
 
+  }
+
+  inviteFriend() {
+    SocialSharing.shareViaFacebook('Teste', '', 'http://ansodev.com');
+  }
+
+  logout(successCallback) {
+    let local = new Storage(LocalStorage);
+    local.remove('token').then(() => {
+      successCallback();
+    });
   }
 }

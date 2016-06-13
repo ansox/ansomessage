@@ -6,7 +6,9 @@
     <ion-list inset>
       <button ion-item (click)="openMenu(messages)"  menuClose><ion-icon name="chatboxes"></ion-icon>  Mensagens</button>
       <button ion-item (click)="openMenu(friends)"  menuClose><ion-icon name="contacts"></ion-icon> Amigos</button>
-      <button ion-item menuClose><ion-icon name="logo-facebook"></ion-icon> Compartilhar </button>
+      <button ion-item (click)="invite()" menuClose><ion-icon name="logo-facebook"></ion-icon> Compartilhar </button>
+      <button ion-item (click)="logout()" menuClose><ion-icon name="close-circle"></ion-icon> Sair </button>
+
     </ion-list>
   </ion-content>
 </ion-menu>

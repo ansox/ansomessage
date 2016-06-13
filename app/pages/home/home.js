@@ -1,20 +1,23 @@
 import {Component} from '@angular/core';
-import {Platform} from 'ionic-angular';
+import {Platform, NavController} from 'ionic-angular';
 import {MessagesPage} from '../messages/messages';
 import {FriendsPage} from '../friends/friends';
 import {Fire} from '../../firebase/fire';
+import {LoginPage} from '../login/login';
 
 @Component({
   templateUrl: 'build/pages/home/home.html'
 })
 export class HomePage {
   static get parameters() {
-    return [[Platform], [Fire]];
+    return [[Platform], [Fire], [NavController]];
   }
-  constructor(platform, fire) {
+  constructor(platform, fire, nav) {
     this.messages = MessagesPage;
     this.friends = FriendsPage;
     this.rootPage = MessagesPage;
+    this.fire = fire;
+    this.nav = nav;
 
     platform.ready().then(() => {
       var notificationOpenedCallback = function(jsonData) {
@@ -39,6 +42,17 @@ export class HomePage {
 
   openMenu(opcao) {
     this.rootPage = opcao;
+  }
+
+  invite() {
+    this.fire.inviteFriend();
+  }
+
+  logout() {
+    let _this = this;
+    this.fire.logout(() => {
+      _this.nav.setRoot(LoginPage);
+    });
   }
 
 }
