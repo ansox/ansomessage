@@ -1,20 +1,22 @@
 import {Component} from '@angular/core';
 import {NavController, Platform, NavParams, Loading} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
-import {Fire} from '../../firebase/fire';
+import {Messages} from '../../util/messages';
+import {LoginUser} from '../../util/login-user';
 
 @Component({
   templateUrl: 'build/pages/mapa/mapa.html',
 })
 export class MapaPage {
   static get parameters() {
-    return [[NavController], [Platform], [Fire], [NavParams]];
+    return [[NavController], [Platform], [Messages], [NavParams], [LoginUser]];
   }
 
-  constructor(nav, platform, fire, params) {
+  constructor(nav, platform, messages, params, loginUser) {
     this.nav = nav;
     this.map = {};
-    this.fire = fire;
+    this.messages = messages;
+    this.user = loginUser.user;
     this.message = "";
     this.endereco = "";
 
@@ -82,7 +84,7 @@ export class MapaPage {
   }
 
   sendMessage() {
-    this.fire.sendMessage(this.message, this.friend, this.latitude, this.longitude, this.endereco);
+    this.messages.sendMessage(this.user, this.message, this.friend, this.latitude, this.longitude, this.endereco);
     this.nav.pop();
   }
 }

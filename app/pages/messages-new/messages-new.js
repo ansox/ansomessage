@@ -1,25 +1,27 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {Fire} from '../../firebase/fire';
 import {Geolocation} from 'ionic-native';
 import {RotasPage} from '../rotas/rotas';
-import {MessageBodyPage} from '../message-body/message-body'
+import {MessageBodyPage} from '../message-body/message-body';
+import {Messages} from '../../util/messages';
+import {LoginUser} from '../../util/login-user';
 
 @Component({
   templateUrl: 'build/pages/messages-new/messages-new.html',
 })
 export class MessagesNewPage {
   static get parameters() {
-    return [[NavController], [Fire]];
+    return [[NavController], [Messages], [LoginUser]];
   }
 
-  constructor(nav, fire) {
+  constructor(nav, messages, loginUser) {
     this.nav = nav;
 
     this.messageList = [];
-    this.fire = fire;
+    this.messages = messages;
+    this.user = loginUser.user;
 
-    this.fire.getMessage(false, (messagePost) => {
+    this.messages.getMessage(this.user, false, (messagePost) => {
       this.messageList.push(messagePost);
       this._getAllDistances();
     });
@@ -61,12 +63,13 @@ export class MessagesNewPage {
 
   openMessage(item) {
     let _this = this;
-    this.nav.push(MessageBodyPage, {message: item});
-    this.fire.setMessageRead(item, () => {
-      let index = _this.messageList.indexOf(item);
-      if (index >= 0) {
-        this.messageList.splice(index, 1);
-      }
+    this.nav.push(MessageBodyPage, {message: item}).then(() => {
+      this.messages.setMessageRead(this.user, item, () => {
+        let index = _this.messageList.indexOf(item);
+        if (index >= 0) {
+          this.messageList.splice(index, 1);
+        }
+      });
     });
   }
 }

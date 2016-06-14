@@ -1,22 +1,22 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {Fire} from '../../firebase/fire';
 import {MessageBodyPage} from '../message-body/message-body';
+import {Messages} from '../../util/messages';
+import {LoginUser} from '../../util/login-user';
 
 @Component({
   templateUrl: 'build/pages/messages-read/messages-read.html',
 })
 export class MessagesReadPage {
   static get parameters() {
-    return [[NavController], [Fire]];
+    return [[NavController], [Messages], [LoginUser]];
   }
 
-  constructor(nav, fire) {
+  constructor(nav, messages, loginUser) {
     this.nav = nav;
     this.messageList = [];
-    this.fire = fire;
 
-    this.fire.getMessage(true, (messagePost) => {
+    messages.getMessage(loginUser.user, true, (messagePost) => {
       this.messageList.push(messagePost);
     });
   }

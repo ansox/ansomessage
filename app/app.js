@@ -4,6 +4,9 @@ import {StatusBar} from 'ionic-native';
 import {HomePage} from './pages/home/home';
 import {LoginPage} from './pages/login/login';
 import {Fire} from './firebase/fire';
+import {LoginUser} from './util/login-user';
+import {Messages} from './util/messages';
+import {FacebookUtil} from './util/facebook-util';
 
 
 @Component({
@@ -25,4 +28,4 @@ export class MyApp {
   }
 }
 
-ionicBootstrap(MyApp, [Fire]);
+ionicBootstrap(MyApp, [Fire, LoginUser, Messages, FacebookUtil]);

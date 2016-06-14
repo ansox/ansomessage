@@ -2,42 +2,24 @@ import {Component} from '@angular/core';
 import {Platform, NavController} from 'ionic-angular';
 import {MessagesPage} from '../messages/messages';
 import {FriendsPage} from '../friends/friends';
-import {Fire} from '../../firebase/fire';
 import {LoginPage} from '../login/login';
+import {LoginUser} from '../../util/login-user';
+import {FacebookUtil} from '../../util/facebook-util';
 
 @Component({
   templateUrl: 'build/pages/home/home.html'
 })
 export class HomePage {
   static get parameters() {
-    return [[Platform], [Fire], [NavController]];
+    return [[Platform], [NavController], [LoginUser], [FacebookUtil]];
   }
-  constructor(platform, fire, nav) {
+  constructor(platform, nav, loginUser, facebookUtil) {
     this.messages = MessagesPage;
     this.friends = FriendsPage;
     this.rootPage = MessagesPage;
-    this.fire = fire;
     this.nav = nav;
-
-    platform.ready().then(() => {
-      var notificationOpenedCallback = function(jsonData) {
-        console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
-      };
-
-      window.plugins.OneSignal.init("020c0b61-0f92-452d-a3fb-c2421e9ea089",
-                                     {googleProjectNumber: "183826080960"},
-                                     notificationOpenedCallback);
-
-      // Show an alert box if a notification comes in when the user is in your app.
-      window.plugins.OneSignal.enableInAppAlertNotification(false);
-
-      window.plugins.OneSignal.enableNotificationsWhenActive(true);
-
-      fire.setPushId(() => {
-        console.log('add push id');
-      });
-
-    });
+    this.loginUser = loginUser;
+    this.facebookUtil = facebookUtil;
   }
 
   openMenu(opcao) {
@@ -45,12 +27,12 @@ export class HomePage {
   }
 
   invite() {
-    this.fire.inviteFriend();
+    this.facebookUtil.inviteFriend();
   }
 
   logout() {
     let _this = this;
-    this.fire.logout(() => {
+    this.loginUser.logout(() => {
       _this.nav.setRoot(LoginPage);
     });
   }

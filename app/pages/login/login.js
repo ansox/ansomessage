@@ -1,22 +1,22 @@
 import {Component} from '@angular/core';
 import {NavController, Loading} from 'ionic-angular';
 import {HomePage} from '../home/home';
-import {Fire} from '../../firebase/fire'
+import {LoginUser} from '../../util/login-user';
 
 @Component({
   templateUrl: 'build/pages/login/login.html',
 })
 export class LoginPage {
   static get parameters() {
-    return [[NavController], [Fire]];
+    return [[NavController], [LoginUser]];
   }
 
-  constructor(nav, fire, platform) {
+  constructor(nav, login) {
     this.nav = nav;
-    this.fire = fire;
+    this.loginUser = login;
     let _this = this;
 
-    this.fire.showLoginPage(result => {
+    this.loginUser.showLoginPage(result => {
       _this.showButton = result;
       if (!result) {
         _this.login();
@@ -25,7 +25,7 @@ export class LoginPage {
   }
 
   login() {
-    this.fire.login(() => {
+    this.loginUser.login(() => {
       this.nav.setRoot(HomePage);
     }, (error) => {
       alert(error);

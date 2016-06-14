@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, Loading} from 'ionic-angular';
-import {Fire} from '../../firebase/fire';
+import {FacebookUtil} from '../../util/facebook-util';
+import {LoginUser} from '../../util/login-user';
 import {MapaPage} from '../mapa/mapa';
 
 @Component({
@@ -8,12 +9,11 @@ import {MapaPage} from '../mapa/mapa';
 })
 export class FriendsPage {
   static get parameters() {
-    return [[NavController], [Fire]];
+    return [[NavController], [FacebookUtil], [LoginUser]];
   }
 
-  constructor(nav, fire) {
+  constructor(nav, facebookUtil, loginUser) {
     this.nav = nav;
-    this.fire = fire;
 
     let loading = Loading.create({
       spinner: "circles",
@@ -22,15 +22,8 @@ export class FriendsPage {
 
     this.nav.present(loading);
 
-    fire.getFriends((list) => {
+    facebookUtil.getFriends(loginUser.user, (list) => {
       this.friendsList = list;
-
-      for (var i = 0; i < this.friendsList.length; i++) {
-        let friend = this.friendsList[i];
-        fire.getPhoto(this.friendsList[i].id, (photoUrl) => {
-          friend.photo = photoUrl;
-        });
-      }
 
       loading.dismiss();
     });
