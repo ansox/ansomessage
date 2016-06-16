@@ -44,7 +44,7 @@ export class Messages {
     }
   }
 
-  sendMessage(user, message, friend, latitude, longitude, endereco) {
+  sendMessage(user, message, friend, latitude, longitude, endereco, successCallback) {
     let messageDate = new Date();
     let ref = firebase.database().ref();
 
@@ -69,7 +69,7 @@ export class Messages {
         };
 
         window.plugins.OneSignal.postNotification(notification, (response) => {
-          alert(response);
+          successCallback();
         });
       })
     })

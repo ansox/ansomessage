@@ -57,8 +57,7 @@ export class MessagesNewPage {
   }
 
   isNear(item) {
-    // return item.distance <= 0.2;
-    return true;
+    return item.distance <= 0.2;
   }
 
   openMessage(item) {

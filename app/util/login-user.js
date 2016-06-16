@@ -1,16 +1,17 @@
 import {Injectable} from '@angular/core';
-import {Storage, LocalStorage} from 'ionic-angular';
+import {Storage, LocalStorage, Platform} from 'ionic-angular';
 import {Facebook} from 'ionic-native';
 import {Fire} from '../firebase/fire';
 
 @Injectable()
 export class LoginUser {
   static get parameters() {
-    return [[Fire]]
+    return [[Fire], [Platform]]
   }
-  constructor(fire) {
+  constructor(fire, platform) {
     this.fire = fire;
     this.user = {};
+    this.platform = platform;
   }
 
   _setUser(accessToken, pushId, authData) {
@@ -46,9 +47,11 @@ export class LoginUser {
   }
 
   _getPushId(successCallback) {
-    this._initOneSignal();
-    window.plugins.OneSignal.getIds(ids => {
-      successCallback(ids.userId);
+    this.platform.ready().then(() => {
+      this._initOneSignal();
+      window.plugins.OneSignal.getIds(ids => {
+        successCallback(ids.userId);
+      });
     });
   }
 

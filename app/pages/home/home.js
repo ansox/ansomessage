@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Platform, NavController} from 'ionic-angular';
+import {Platform, NavController, Loading} from 'ionic-angular';
 import {MessagesPage} from '../messages/messages';
 import {FriendsPage} from '../friends/friends';
 import {LoginPage} from '../login/login';
@@ -27,7 +27,15 @@ export class HomePage {
   }
 
   invite() {
-    this.facebookUtil.inviteFriend();
+    let loading = Loading.create({
+      content: 'Loading...'
+    });
+
+    this.nav.present(loading);
+
+    this.facebookUtil.inviteFriend(() => {
+      loading.dismiss();
+    });
   }
 
   logout() {

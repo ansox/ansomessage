@@ -29,8 +29,10 @@ export class FacebookUtil {
     })
   }
 
-  inviteFriend() {
-    SocialSharing.shareViaFacebook('Teste', '', 'http://ansodev.com');
+  inviteFriend(successCallback) {
+    SocialSharing.shareViaFacebook('Teste', '', 'http://ansodev.com').then(() => {
+      successCallback();
+    });
   }
 
 

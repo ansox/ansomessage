@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, Platform, NavParams, Loading} from 'ionic-angular';
+import {NavController, Platform, NavParams, Loading, Toast} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {Messages} from '../../util/messages';
 import {LoginUser} from '../../util/login-user';
@@ -84,7 +84,17 @@ export class MapaPage {
   }
 
   sendMessage() {
-    this.messages.sendMessage(this.user, this.message, this.friend, this.latitude, this.longitude, this.endereco);
-    this.nav.pop();
+    this.messages.sendMessage(this.user, this.message, this.friend, this.latitude, this.longitude, this.endereco, () => {
+      let toast = Toast.create({
+        message: 'Mensagem enviada com sucesso!',
+        duration: 2000,
+        position: 'bottom'
+      });
+
+      this.nav.present(toast);
+
+      this.nav.pop();
+    });
+
   }
 }
